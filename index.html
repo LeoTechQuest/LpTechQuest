@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LpTechQuest | Reliable IT Support</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Floating Logo */
+        .floating-logo {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .floating-logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+        .floating-logo span {
+            color: #000;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+        .whatsapp-btn img {
+            width: 35px;
+            height: 35px;
+        }
+        
+        /* Gold accent classes */
+        .text-gold { color: #FFD700; }
+        .bg-gold { background-color: #FFD700; }
+        .border-gold { border-color: #FFD700; }
+        .hover\:bg-gold-dark:hover { background-color: #E6C200; }
+        
+        /* Form Input Styling for Dark Mode */
+        .form-input {
+            background-color: #1f2937; /* gray-800 */
+            border: 1px solid #374151; /* gray-700 */
+            color: white;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+
+    <!-- Floating Logo -->
+    <div class="floating-logo" onclick="showPage('home')">
+        <span>LpTechQuest</span>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/263774816018" target="_blank" class="whatsapp-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
+    <!-- Navigation -->
+    <nav class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="showPage('home')">
+                        <span class="text-gold font-bold text-xl">LpTechQuest</span>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <button onclick="showPage('home')" id="nav-home" class="border-yellow-500 text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</button>
+                    <button onclick="showPage('plans')" id="nav-plans" class="border-transparent text-gray-400 hover:text-white hover:border-gray-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Services & Plans</button>
+                    <button onclick="showPage('contact')" id="nav-contact" class="border-transparent text-gray-400 hover:text-white hover:border-gray-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Contact Us</button>
+                </div>
+                <div class="flex items-center sm:hidden">
+                    <button onclick="showMobileMenu()" class="text-gray-400 hover:text-white focus:outline-none">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/menu.svg" class="h-6 w-6" alt="Menu">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden sm:hidden bg-gray-900 border-b border-gray-800">
+            <div class="pt-2 pb-3 space-y-1">
+                <button onclick="showPage('home')" class="block pl-3 pr-4 py-2 border-l-4 border-yellow-500 text-base font-medium text-gold bg-gray-800">Home</button>
+                <button onclick="showPage('plans')" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-400 hover:bg-gray-800 text-base font-medium">Services & Plans</button>
+                <button onclick="showPage('contact')" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-400 hover:bg-gray-800 text-base font-medium">Contact Us</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE 1: HOME -->
+    <main id="page-home" class="fade-in">
+        <!-- Hero Section -->
+        <div class="bg-gray-900 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+                <div class="text-center max-w-4xl mx-auto relative z-10">
+                    <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                        <span class="block xl:inline">Stop fixing.</span>
+                        <span class="block text-gold xl:inline">Start growing.</span>
+                    </h1>
+                    <p class="mt-6 text-lg text-gray-400 sm:text-xl max-w-2xl mx-auto">
+                        Reliable, subscription-based IT support for families and businesses in Zimbabwe. Predictable monthly costs, proactive monitoring, and expert advice on call.
+                    </p>
+                    <div class="mt-10 flex justify-center gap-4">
+                        <button onclick="showPage('plans')" class="px-8 py-3 border border-transparent text-base font-medium rounded-md text-black bg-gold hover:bg-gold-dark md:text-lg shadow-lg shadow-yellow-500/20">
+                            View Plans
+                        </button>
+                        <button onclick="showPage('contact')" class="px-8 py-3 border border-gray-600 text-base font-medium rounded-md text-white hover:bg-gray-800 md:text-lg">
+                            Contact Us
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Value Props -->
+        <div class="py-16 bg-black">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center mb-12">
+                    <h2 class="text-base text-gold font-semibold tracking-wide uppercase">Why Us</h2>
+                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+                        IT support that fits your life
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="flex flex-col items-center text-center p-6 bg-gray-900 rounded-xl border border-gray-800">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/shield-check.svg" class="h-12 w-12 text-gold mb-4" alt="Secure">
+                        <dt class="text-lg font-bold text-white mb-2">Proactive Security</dt>
+                        <dd class="text-base text-gray-400">We stop issues before they happen. Monthly health checks and virus removal included.</dd>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center p-6 bg-gray-900 rounded-xl border border-gray-800">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/wallet.svg" class="h-12 w-12 text-gold mb-4" alt="Affordable">
+                        <dt class="text-lg font-bold text-white mb-2">Fixed Pricing</dt>
+                        <dd class="text-base text-gray-400">No surprise call-out fees. Just a flat monthly rate for peace of mind.</dd>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center p-6 bg-gray-900 rounded-xl border border-gray-800">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/user-check.svg" class="h-12 w-12 text-gold mb-4" alt="Expert">
+                        <dt class="text-lg font-bold text-white mb-2">Local Experts</dt>
+                        <dd class="text-base text-gray-400">A tech-savvy relative on call. We know your setup so we don't start from zero.</dd>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Grid Section -->
+        <div class="py-16 bg-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-white">Complete IT Solutions</h2>
+                    <p class="mt-4 text-lg text-gray-400">From home WiFi to corporate networks, we handle it all.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Card 1: Security -->
+                    <div class="service-card bg-black border border-gray-800 rounded-xl overflow-hidden hover:border-gold transition-colors duration-300">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=600&auto=format&fit=crop" alt="Security" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white">Security & CCTV</h3>
+                            <p class="text-sm text-gray-400 mt-2">Hardware installation, network hardening, and remote monitoring.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Cloud -->
+                    <div class="service-card bg-black border border-gray-800 rounded-xl overflow-hidden hover:border-gold transition-colors duration-300">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop" alt="Cloud" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white">Cloud & Email</h3>
+                            <p class="text-sm text-gray-400 mt-2">Google Workspace & Microsoft 365 setup, migration, and backup.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Network -->
+                    <div class="service-card bg-black border border-gray-800 rounded-xl overflow-hidden hover:border-gold transition-colors duration-300">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=600&auto=format&fit=crop" alt="Network" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white">Network Setup</h3>
+                            <p class="text-sm text-gray-400 mt-2">Routers, LANs, extenders, and home office networking.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Support -->
+                    <div class="service-card bg-black border border-gray-800 rounded-xl overflow-hidden hover:border-gold transition-colors duration-300">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop" alt="Support" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white">Remote Support</h3>
+                            <p class="text-sm text-gray-400 mt-2">Virus removal, software setup, and troubleshooting on-demand.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- PAGE 2: PLANS & SERVICES -->
+    <main id="page-plans" class="hidden fade-in">
+        
+        <!-- Tiers Section -->
+        <div class="bg-gray-900 py-16 px-4 overflow-hidden sm:px-6 lg:px-8 lg:py-24">
+            <div class="relative max-w-xl mx-auto">
+                <div class="text-center">
+                    <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                        Flexible Subscription Plans
+                    </h2>
+                    <p class="mt-4 text-lg text-gray-400">
+                        Choose the tier that fits your needs. No hidden fees.
+                    </p>
+                </div>
+                <div class="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4">
+                    
+                    <!-- Individual -->
+                    <div class="border border-gray-700 rounded-lg shadow-sm divide-y divide-gray-700 bg-black">
+                        <div class="p-6">
+                            <h2 class="text-lg leading-6 font-medium text-white">Individual</h2>
+                            <p class="mt-4 text-sm text-gray-400">Perfect for personal tech and home wifi.</p>
+                            <p class="mt-8">
+                                <span class="text-4xl font-extrabold text-gold">$10–15</span>
+                                <span class="text-base font-medium text-gray-400">/mo</span>
+                            </p>
+                        </div>
+                        <div class="pt-6 pb-8 px-6">
+                            <ul class="space-y-4 text-sm">
+                                <li class="flex items-start"><img src="https://unpkg.com/lucide-static@latest/icons/check.svg" class="h-5 w-5 text-gold flex-shrink-0 mr-2" alt="Check"><span class="text-gray-300">Remote troubleshooting</span></li>
+                                <li class="flex items-start"><img src="https://unpkg.com/lucide-static@latest/icons/check.svg" class="h-5 w-5 text-gold flex-shrink-0 mr-2" alt="Check"><span class="text-gray-300">Virus & malware removal</span></li>
+                                <li class="flex items-start"><img src="https://unpkg.com/lucide-static@latest/icons/check.svg" class="h-5 w-5 text-gold flex-shrink-0 mr-2" alt="Check"><span class="text-gray-300">Monthly device health check</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Family -->
+                    <div class="border border-gray-700 rounded-lg shadow-sm divide-y divide-gray-700 bg-black">
+                        <div class="p-6">
+                            <h2 class="text-lg leading-6 font-medium text-white">Family Plan</h2>
+                            <p class="mt-4 text-sm text-gray-400">For the whole household.</p>
+                            <p class="mt-8">
+                                <span class="text-4xl font-extrabold text-gold">$20–30</span>
+                                <span class="text-base font-medium text-gray-400">/mo</span>
+                            </p>
+                        </div>
+                        <div class="pt-6 pb-8 px-6">
+                            <ul class="space-y-4 text-sm">
+                                <li class="flex items-start"><img src="https://unpkg.com/lucide-static@latest/icons/check.svg" class="h-5 w-5 text-gold flex-shrink-0 mr-2" alt="Check"><span class="text-gray-300">Up to 5 devices covered</span></li>
+                                <li class="flex items-start"><img src="https://unpkg.com/lucide-static@latest/icons/check.svg" class="h-5 w-5 text-gold flex-shrink-0 mr-2" alt="Check"><span class="text-gray-300">Smart home & parental controls</span></li>
+                                <li class="flex items-start"><img src="https://unpkg.com/lucide-static@latest/icons/check.svg" class="h-5 w-5 text-gold flex-shrink-0 mr-2" alt="Check"><span class="text-gray-300">Priority WhatsApp response</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SME -->
+                    <div class="border border-gold ring-2 ring-gold rounded-lg shadow-sm divide-y divide-gray-700 relative bg-black">
+                        <div class="absolute top-0 right-0 -mt-px -mr-px rounded-tr-lg rounded-bl-lg bg-gold px-3 py-1 text-xs font-semibold tracking-wide text-black uppercase">Popular</div>
+                        <div class="p-6">
+                            <h2 class="text-lg leading-6 font-medium text-white">SME Business</h2>
+                            <p class="mt-4 text-sm text-gray-400">Your IT department for less.</p>
+                            <p class="mt-8">
+                                <span class="text-4xl font-extrabold text-gold">$80–150</span>
+                                <span class="text-base font-medium text-gray-400">/mo</span>
+                            </p>
+                        </div>
+                        <div class="pt-6 pb-8 px-6">
+                            <ul class="space-y-4 text-sm">
+                                <li class="flex items-start"><img src="https://unpkg.com/lucide-static@latest/icons/check.svg" class="h-5 w-5 text-gold flex-shrink-0 mr-2" alt="Check"><span class="text-gray-300">Staff helpdesk support</span></li>
+                                <li class="flex items-start"><img src="https://unpkg.com/lucide-static@latest/icons/check.svg" class="h-5 w-5 text-gold flex-shrink-0 mr-2" alt="Check"><span class="text-gray-300">Network setup & maintenance</span></li>
+                                <li class="flex items-start"><img src="https://unpkg.com/lucide-static@latest/icons/check.svg" class="h-5 w-5 text-gold flex-shrink-0 mr-2" alt="Check"><span class="text-gray-300">Basic cybersecurity & training</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Corporate -->
+                    <div class="border border-gray-700 rounded-lg shadow-sm divide-y divide-gray-700 bg-black">
+                        <div class="p-6">
+                            <h2 class="text-lg leading-6 font-medium text-white">Corporate</h2>
+                            <p class="mt-4 text-sm text-gray-400">Full managed services.</p>
+                            <p class="mt-8">
+                                <span class="text-4xl font-extrabold text-gold">Custom</span>
+                                <span class="text-base font-medium text-gray-400">/mo</span>
+                            </p>
+                        </div>
+                        <div class="pt-6 pb-8 px-6">
+                            <ul class="space-y-4 text-sm">
+                                <li class="flex items-start"><img src="https://unpkg.com/lucide-static@latest/icons/check.svg" class="h-5 w-5 text-gold flex-shrink-0 mr-2" alt="Check"><span class="text-gray-300">Dedicated account contact</span></li>
+                                <li class="flex items-start"><img src="https://unpkg.com/lucide-static@latest/icons/check.svg" class="h-5 w-5 text-gold flex-shrink-0 mr-2" alt="Check"><span class="text-gray-300">Infrastructure monitoring</span></li>
+                                <li class="flex items-start"><img src="https://unpkg.com/lucide-static@latest/icons/check.svg" class="h-5 w-5 text-gold flex-shrink-0 mr-2" alt="Check"><span class="text-gray-300">SLA-backed response times</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Services List -->
+        <div class="py-12 bg-black">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-2xl font-bold text-white mb-8">Our Services</h2>
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-800">
+                        <div class="h-12 w-12 bg-yellow-900/30 rounded flex items-center justify-center mb-4">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/monitor.svg" class="h-6 w-6 text-gold" alt="Support">
+                        </div>
+                        <h3 class="font-bold text-white">IT Support</h3>
+                        <p class="text-sm text-gray-400 mt-2">Remote-first troubleshooting for laptops, phones, and printers.</p>
+                    </div>
+
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-800">
+                        <div class="h-12 w-12 bg-yellow-900/30 rounded flex items-center justify-center mb-4">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/network.svg" class="h-6 w-6 text-gold" alt="Network">
+                        </div>
+                        <h3 class="font-bold text-white">Network Setup</h3>
+                        <p class="text-sm text-gray-400 mt-2">From home WiFi to small office LANs and extenders.</p>
+                    </div>
+
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-800">
+                        <div class="h-12 w-12 bg-yellow-900/30 rounded flex items-center justify-center mb-4">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/shield.svg" class="h-6 w-6 text-gold" alt="Security">
+                        </div>
+                        <h3 class="font-bold text-white">Cybersecurity</h3>
+                        <p class="text-sm text-gray-400 mt-2">Antivirus, firewall config, and phishing awareness training.</p>
+                    </div>
+
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-800">
+                        <div class="h-12 w-12 bg-yellow-900/30 rounded flex items-center justify-center mb-4">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/cloud.svg" class="h-6 w-6 text-gold" alt="Cloud">
+                        </div>
+                        <h3 class="font-bold text-white">Cloud Solutions</h3>
+                        <p class="text-sm text-gray-400 mt-2">Google Workspace / Microsoft 365 setup & cloud backup.</p>
+                    </div>
+
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-800">
+                        <div class="h-12 w-12 bg-yellow-900/30 rounded flex items-center justify-center mb-4">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/brain.svg" class="h-6 w-6 text-gold" alt="Training">
+                        </div>
+                        <h3 class="font-bold text-white">Training</h3>
+                        <p class="text-sm text-gray-400 mt-2">Short how-to sessions for staff or family members.</p>
+                    </div>
+
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-800">
+                        <div class="h-12 w-12 bg-yellow-900/30 rounded flex items-center justify-center mb-4">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/file-text.svg" class="h-6 w-6 text-gold" alt="Web">
+                        </div>
+                        <h3 class="font-bold text-white">Web & Social</h3>
+                        <p class="text-sm text-gray-400 mt-2">Basic website/social media upkeep for SME clients.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Callout -->
+        <div class="bg-gradient-to-r from-yellow-600 to-yellow-500 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-extrabold text-black">Ready to get started?</h2>
+                <p class="mt-4 text-black text-lg">Contact us for a quote or consultation today.</p>
+                <div class="mt-8 flex justify-center gap-4">
+                    <button onclick="showPage('contact')" class="bg-black text-gold px-6 py-3 rounded-md font-bold shadow hover:bg-gray-900">Email Us</button>
+                    <a href="https://wa.me/263774816018" target="_blank" class="bg-green-600 text-white border border-green-400 px-6 py-3 rounded-md font-bold shadow hover:bg-green-700">WhatsApp Us</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- PAGE 3: CONTACT US -->
+    <main id="page-contact" class="hidden fade-in">
+        <div class="bg-gray-900 py-16 px-4 sm:px-6 lg:px-8 min-h-screen">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Get In Touch</h2>
+                    <p class="mt-4 text-lg text-gray-400">Fill out the form below and we'll get back to you shortly.</p>
+                </div>
+
+                <div class="bg-black p-8 rounded-2xl shadow-xl border border-gray-800">
+                    <!-- 
+                        IMPORTANT: Replace 'YOUR_FORMSPREE_ID' below with your actual Formspree ID.
+                        1. Go to https://formspree.io/register
+                        2. Create a new form using leonardpokoto925@gmail.com
+                        3. Copy the endpoint URL (e.g., https://formspree.io/f/xnqkvpzy)
+                        4. Paste it in the action="" attribute below
+                    -->
+                    <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="space-y-6">
+                        
+                        <!-- Name Field -->
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
+                            <input type="text" id="name" name="name" required placeholder="John Doe" 
+                                class="form-input w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-gold transition-all">
+                        </div>
+
+                        <!-- Phone Number Field -->
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+263 77 123 4567" 
+                                class="form-input w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-gold transition-all">
+                        </div>
+
+                        <!-- Email Address Field -->
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com" 
+                                class="form-input w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-gold transition-all">
+                        </div>
+
+                        <!-- Message Field -->
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">How can we help?</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Describe your IT needs..." 
+                                class="form-input w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-gold transition-all"></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="w-full bg-gold text-black font-bold py-4 rounded-lg hover:bg-gold-dark transition-colors duration-300 shadow-lg shadow-yellow-500/20 flex items-center justify-center gap-2">
+                            <span>Send Message</span>
+                            <img src="https://unpkg.com/lucide-static@latest/icons/send.svg" class="h-5 w-5" alt="Send">
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <p>&copy; 2026 LpTechQuest. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-gold">Privacy</a>
+                <a href="#" class="hover:text-gold">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation Logic
+        function showPage(pageId) {
+            document.getElementById('page-home').classList.add('hidden');
+            document.getElementById('page-plans').classList.add('hidden');
+            document.getElementById('page-contact').classList.add('hidden');
+            
+            document.getElementById('page-' + pageId).classList.remove('hidden');
+            window.scrollTo(0, 0);
+
+            // Update Nav Active States
+            const navIds = ['home', 'plans', 'contact'];
+            navIds.forEach(id => {
+                const btn = document.getElementById('nav-' + id);
+                if(btn) {
+                    if(id === pageId) {
+                        btn.className = "border-yellow-500 text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium";
+                    } else {
+                        btn.className = "border-transparent text-gray-400 hover:text-white hover:border-gray-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium";
+                    }
+                }
+            });
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        function showMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
